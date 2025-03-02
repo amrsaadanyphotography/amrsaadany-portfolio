@@ -2,9 +2,16 @@
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
+const projectId = process.env.SANITY_PROJECT_ID; // Use environment variable
+const dataset = process.env.SANITY_DATASET; // Use environment variable
+
+if (!projectId || !dataset) {
+  console.error('Missing SANITY_PROJECT_ID or SANITY_DATASET in environment variables');
+}
+
 export const sanityClient = createClient({
-  projectId: 'nw6fltyv', // Replace with your actual Sanity project ID
-  dataset: 'production', // Use the dataset name you created in Sanity
+  projectId,
+  dataset,
   apiVersion: '2023-10-22', // Use a specific API version
   useCdn: true, // Enable CDN for faster image loading
 });
